@@ -22,6 +22,7 @@ class AssetIn(
             ("key", PublicAttr[Optional[AssetKey]]),
             ("metadata", PublicAttr[Optional[ArbitraryMetadataMapping]]),
             ("key_prefix", PublicAttr[Optional[Sequence[str]]]),
+            ("asset_key", PublicAttr[Optional[Sequence[str]]]),
             ("input_manager_key", PublicAttr[Optional[str]]),
             ("partition_mapping", PublicAttr[Optional[PartitionMapping]]),
             ("dagster_type", PublicAttr[Union[DagsterType, Type[NoValueSentinel]]]),
@@ -71,6 +72,7 @@ class AssetIn(
             key=AssetKey.from_coercible(key) if key is not None else None,
             metadata=check.opt_inst_param(metadata, "metadata", Mapping),
             key_prefix=check.opt_list_param(key_prefix, "key_prefix", of_type=str),
+            asset_key=check.opt_list_param(asset_key, "asset_key", of_type=str),
             input_manager_key=check.opt_str_param(input_manager_key, "input_manager_key"),
             partition_mapping=check.opt_inst_param(
                 partition_mapping, "partition_mapping", PartitionMapping
